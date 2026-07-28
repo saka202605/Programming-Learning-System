@@ -1,15 +1,89 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>テストページ</title>
+  <meta charset="UTF-8">
+  <title>ユーザー情報入力</title>
 </head>
-
 <body>
+  <h1>ユーザー情報の入力</h1>
 
-<h1>Hello Python World!</h1>
+  <form id="userForm">
+    <label for="department">学部：</label>
 
-<p>GitHub Pagesのテストです。</p>
+<select id="department" required>
+  <option value="">選択してください</option>
+  <option value="F1">F1</option>
+  <option value="F2">F2</option>
+  <option value="F3">F3</option>
+  <option value="F4">F4</option>
+  <option value="J2">J2</option>
+  <option value="J4">J4</option>
+</select>
 
+<br><br>
+
+    <label for="class">クラス：</label>
+    <select id="class" required>
+      <option value="">選択してください</option>
+      <option value="1">1組</option>
+      <option value="2">2組</option>
+      <option value="3">3組</option>
+      <option value="4">4組</option>
+      <option value="5">5組</option>
+      <option value="6">6組</option>
+      <option value="6">7組</option>
+      <option value="6">8組</option>
+    </select><br><br>
+
+    <label for="number">番号：</label>
+    <select id="number" required>
+      <option value="">選択してください</option>
+      <!-- 1〜30番をJSで生成 -->
+    </select><br><br>
+
+    <label for="name">名前：</label>
+    <input type="text" id="name" required><br><br>
+
+    <button type="submit">開始</button>
+  </form>
+
+  <script>
+    // 番号を 1〜30番まで自動生成
+    const numberSelect = document.getElementById("number");
+    for (let i = 1; i <= 30; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i + "番";
+      numberSelect.appendChild(option);
+    }
+
+    document.getElementById("userForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const userInfo = {
+
+  department:
+      document.getElementById("department").value,
+
+  class:
+      document.getElementById("class").value,
+
+  number:
+      document.getElementById("number").value,
+
+  name:
+      document.getElementById("name").value.trim()
+
+};
+
+      if (!userInfo.department ||!userInfo.class ||!userInfo.number ||!userInfo.name)
+        alert("すべての項目を入力してください。");
+        return;
+      }
+
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      window.location.href = "1-a.html";
+    });
+  </script>
 </body>
 </html>
